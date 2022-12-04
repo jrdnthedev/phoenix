@@ -1,0 +1,45 @@
+.list-item-details {
+
+}
+
+.list-icon {
+    margin-right: 6px;
+    img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+}
+
+#my-list {
+    padding: 0;
+    margin: 0;
+    li {
+        list-style: none;
+        padding: 6px 0 12px 4px;
+        display: flex;
+        border-top: 1px solid grey;
+        border-right: 1px solid grey;
+        &:last-child {
+            margin-bottom: 0;
+            border-bottom: 1px solid grey;
+        }
+        &.dark {
+            border-left: 4px solid brown;
+        }
+        &.light {
+            border-left: 4px solid yellow;
+        }
+        &.amber {
+            border-left: 4px solid burlywood;
+        }
+    }
+    span {
+        display: inline-block;
+    }
+    p {
+        margin: 0 0 5px 0;
+    }
+    h2,h3 {
+        margin: 0 0 4px 0;
+    }
+}
