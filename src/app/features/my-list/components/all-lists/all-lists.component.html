@@ -1,0 +1,11 @@
+<ion-list>
+  <ng-container *ngFor="let item of myLists">
+  <ion-item detail="true">
+    <ion-label>
+      <h3 class="sub-headline">{{item.name}}</h3>
+      <p>{{item.type}}</p>
+      <p>Total: {{item.total}}</p>
+    </ion-label>
+  </ion-item>
+  </ng-container>
+</ion-list>

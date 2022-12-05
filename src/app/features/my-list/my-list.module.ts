@@ -5,6 +5,7 @@ import { ListDetailsComponent } from './components/list-details/list-details.com
 import { ItemEntryComponent } from './components/item-entry/item-entry.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MyListPageRoutingModule } from './my-list-routing.module';
+import { AllListsComponent } from './components/all-lists/all-lists.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { MyListPageRoutingModule } from './my-list-routing.module';
   declarations: [
     MyListPage,
     ListDetailsComponent,
-    ItemEntryComponent
+    ItemEntryComponent,
+    AllListsComponent
   ]
 })
 export class MyListPageModule {}

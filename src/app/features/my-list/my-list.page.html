@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-segment value="default">
-      <ion-segment-button value="default">
-        <ion-label>View My list</ion-label>
+    <ion-segment value="default" (ionChange)="segmentChanged($event)" [(ngModel)]="segment">
+      <ion-segment-button value="0">
+        <ion-label>View My lists</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="segment">
+      <ion-segment-button value="1">
         <ion-label>Add Item</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -13,7 +13,9 @@
 
 <ion-content>
   <div id="list-container">
-    <!-- <app-list-details></app-list-details> -->
-    <app-item-entry></app-item-entry>
+    <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">  
+      <ion-slide><app-all-lists></app-all-lists></ion-slide>  
+      <ion-slide><app-item-entry></app-item-entry></ion-slide>
+    </ion-slides> 
   </div>
 </ion-content>

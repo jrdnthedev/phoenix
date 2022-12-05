@@ -1,3 +1,7 @@
 #list-container {
     margin: 12px 6px;
 }
+
+app-list-details,app-item-entry,app-all-lists {
+    flex: 1;
+}
