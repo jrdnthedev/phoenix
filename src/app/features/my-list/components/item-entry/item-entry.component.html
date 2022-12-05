@@ -16,8 +16,13 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Beer type</ion-label>
-    <ion-input [clearInput]="true" placeholder="Ex 'Dark' 'Porter' ..." ></ion-input>
+    <ion-label position="stacked">Select Beer type</ion-label>
+    <ion-select placeholder="Make a Selection">
+      <ion-select-option value="">No Selection</ion-select-option>
+      <ion-select-option value="Dark">Dark</ion-select-option>
+      <ion-select-option value="Porter">Porter</ion-select-option>
+      <ion-select-option value="Ale">Ale</ion-select-option>
+    </ion-select>
   </ion-item>
 
   <ion-item>
@@ -26,13 +31,14 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Rating</ion-label>
-    <ion-input [clearInput]="true" placeholder="Enter a rating between 0 - 5" type="number"></ion-input>
+    <ion-label>Rating</ion-label>
+    <ion-range></ion-range>
+    <!-- <ion-input [clearInput]="true" placeholder="Enter a rating between 0 - 5" type="number"></ion-input> -->
   </ion-item>
 
   <ion-item>
-    <ion-label>Notes</ion-label>
-    <ion-input [clearInput]="true" placeholder="Enter flavours you notice" ></ion-input>
+    <ion-label position="stacked">Notes</ion-label>
+    <ion-input [clearInput]="true" placeholder="Enter flavours you notice" class="ion-text-wrap"></ion-input>
   </ion-item>
 
 </ion-list>
