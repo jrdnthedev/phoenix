@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ionic Modal Popup Example</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label position="stacked">Place Name</ion-label>
+      <ion-input [clearInput]="true" placeholder="Enter establishment name" [(ngModel)]="modelName"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Beer Name</ion-label>
+      <ion-input [clearInput]="true" placeholder="Enter beer name" [(ngModel)]="modelBeer"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Address</ion-label>
+      <ion-input [clearInput]="true" placeholder="Enter location" ></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Select Beer type</ion-label>
+      <ion-select placeholder="Make a Selection">
+        <ion-select-option value="">No Selection</ion-select-option>
+        <ion-select-option value="Dark">Dark</ion-select-option>
+        <ion-select-option value="Porter">Porter</ion-select-option>
+        <ion-select-option value="Ale">Ale</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Price</ion-label>
+      <ion-input [clearInput]="true" placeholder="Ex 12.99" type="number" [(ngModel)]="modelPrice"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Rating</ion-label>
+      <!-- <ion-range></ion-range> -->
+      <ion-input [clearInput]="true" placeholder="Enter a rating between 0 - 5" type="number" [(ngModel)]="modelRating"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Notes</ion-label>
+      <ion-input [clearInput]="true" placeholder="Enter flavours you notice" class="ion-text-wrap" [(ngModel)]="modelNotes"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col text-center>
+      <ion-button (click)="closeModel()">Close</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

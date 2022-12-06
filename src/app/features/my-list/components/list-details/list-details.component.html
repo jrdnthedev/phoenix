@@ -1,24 +1,6 @@
-<!-- <ul id="my-list">
-  <ng-container *ngFor="let item of myList">
-    <li [ngClass]="getBeerType(item.type)">
-      <span class="list-icon">
-        <img src="/assets/icon/favicon.png" alt="alt image">
-      </span>
-      <span class="list-item-details">
-        <h2 class="headline">{{item.beer}}</h2>
-        <h3 class="sub-headline">{{item.name}}</h3>
-        <p>{{item.notes}}</p>
-        <p>{{item.price | currency}}</p>
-        <app-rating [rating]="item.rating"></app-rating>
-      </span>
-
-    </li>
-  </ng-container>
-</ul> -->
-
 <ion-list>
   <ng-container *ngFor="let item of myList">
-  <ion-item detail="true">
+  <ion-item detail="true" (click)="openModal(item)">
     <ion-label>
       <h2 class="headline">{{item.beer}}</h2>
       <h3 class="sub-headline">{{item.name}}</h3>
