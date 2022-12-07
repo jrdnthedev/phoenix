@@ -43,3 +43,24 @@
         margin: 0 0 4px 0;
     }
 }
+
+ion-card-header {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
+ion-card-title {
+    font-weight: bold;
+}
+
+ion-card-subtitle {
+    font-weight: bold;
+    color: grey !important;
+    margin: 0 0 8px 0;
+    text-transform: capitalize;
+}
+
+ion-title {
+    font-weight: bold;
+    text-transform: capitalize;
+}

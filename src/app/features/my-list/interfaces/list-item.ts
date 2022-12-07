@@ -8,4 +8,5 @@ export interface ListItem {
     rating: number;
     id: number;
     listId: number;
+    listName: string;
 }
