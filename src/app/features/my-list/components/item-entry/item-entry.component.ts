@@ -15,6 +15,8 @@ export class ItemEntryComponent implements OnInit {
   @Input() location: any;
   @Input() price: number;
   @Input() rating: number;
+  @Input() selectedList: string;
+  @Input() selectedBeerType: string;
   newEntry: any[] = [];
 
   constructor() { }
@@ -25,11 +27,12 @@ export class ItemEntryComponent implements OnInit {
     this.newEntry.push({
       name: this.name,
       beer: this.beer,
-      type: this.type,
+      type: this.selectedBeerType,
       notes: this.notes,
       location: this.location,
       price: this.price,
-      rating: this.rating
+      rating: this.rating,
+      list: this.selectedList,
     });
     console.log('information save!', this.newEntry);
   }

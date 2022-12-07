@@ -16,19 +16,19 @@
 
   <ion-item>
     <ion-label position="stacked">Add To My List</ion-label>
-    <ion-select placeholder="Make a Selection">
+    <ion-select placeholder="Make a Selection" [(ngModel)]="selectedList">
       <ion-select-option value="">No Selection</ion-select-option>
-      <ion-select-option value="Dark">Dark Favourites</ion-select-option>
-      <ion-select-option value="Porter">Porter Favourites</ion-select-option>
-      <ion-select-option value="Ale">Ale Favourites</ion-select-option>
-      <ion-select-option value="Amber">Amber Favourites</ion-select-option>
-      <ion-select-option value="Light">light Favourites</ion-select-option>
+      <ion-select-option value="Dark Favourites">Dark Favourites</ion-select-option>
+      <ion-select-option value="Porter Favourites">Porter Favourites</ion-select-option>
+      <ion-select-option value="Ale Favourites">Ale Favourites</ion-select-option>
+      <ion-select-option value="Amber Favourites">Amber Favourites</ion-select-option>
+      <ion-select-option value="Light Favourites">light Favourites</ion-select-option>
     </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Select Beer type</ion-label>
-    <ion-select placeholder="Make a Selection">
+    <ion-select placeholder="Make a Selection" [(ngModel)]="selectedBeerType">
       <ion-select-option value="">No Selection</ion-select-option>
       <ion-select-option value="Dark">Dark</ion-select-option>
       <ion-select-option value="Porter">Porter</ion-select-option>
