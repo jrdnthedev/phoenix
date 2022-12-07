@@ -1,13 +1,21 @@
-<ion-list>
-  <ng-container *ngFor="let item of myList">
-  <ion-item detail="true" (click)="openModal(item)">
-    <ion-label>
-      <h2 class="headline">{{item.beer}}</h2>
-      <h3 class="sub-headline">{{item.name}}</h3>
-      <p>{{item.notes}}</p>
-      <p>{{item.price | currency}}</p>
-      <app-rating [rating]="item.rating"></app-rating>
-    </ion-label>
-  </ion-item>
-  </ng-container>
-</ion-list>
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="back()">Back</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ng-container *ngFor="let item of listItems">
+    <ion-item detail="true" (click)="openModal(item)">
+      <ion-label>
+        <h2 class="headline">{{item.beer}}</h2>
+        <h3 class="sub-headline">{{item.name}}</h3>
+        <p>{{item.notes}}</p>
+        <p>{{item.price | currency}}</p>
+        <app-rating [rating]="item.rating"></app-rating>
+      </ion-label>
+    </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

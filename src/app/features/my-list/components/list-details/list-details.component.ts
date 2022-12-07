@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonModal, ModalController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { IonModal, ModalController, NavController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/features/my-list/components/modal/modal.component';
 import { ListItem } from '../../interfaces/list-item';
 
@@ -24,10 +25,13 @@ export class ListDetailsComponent implements OnInit {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
   modelData: any;
+  listItems: ListItem[] = [];
 
-  constructor(private _modalController: ModalController) { }
+  constructor(private _modalController: ModalController, private _navCtrl: NavController, private _route: ActivatedRoute) { }
 
   ngOnInit() {
+    const id = Number(this._route.snapshot.paramMap.get('id'));
+    this.getListItems(id);
   }
 
   getBeerType(type: string) {
@@ -67,5 +71,17 @@ export class ListDetailsComponent implements OnInit {
       }
     });
     return await modal.present();
+  }
+
+  back(): void {
+    this._navCtrl.back();
+  }
+
+  getListItems(id: number) {
+    this.myList.forEach(item => {
+      if(item.listId === id){
+        this.listItems.push(item);
+      }
+    });
   }
 }
