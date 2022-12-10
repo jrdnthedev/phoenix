@@ -1,12 +1,15 @@
 export interface ListItem {
-    name: string;
-    beer: string;
+    establishment: string;
+    beerName: string;
     type: string;
     notes: string;
-    location: any;
+    lon: number;
+    lat: number;
+    address: string;
     price: number;
     rating: number;
     id: number;
     listId: number;
     listName: string;
+    image: string;
 }

@@ -3,8 +3,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonModal, ModalController, NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { ModalComponent } from 'src/app/features/my-list/components/modal/modal.component';
-import { ListItem } from '../../interfaces/list-item';
+import { ListItem } from '../../interfaces/list-items/list-item';
+import { ListsService } from '../services/lists/lists.service';
 
 @Component({
   selector: 'app-list-details',
@@ -14,25 +16,19 @@ import { ListItem } from '../../interfaces/list-item';
 
 export class ListDetailsComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
-  myList: ListItem[] = [
-    {listName: 'dark favourites', name: 'bellwoods', id:1, listId:1 , beer: 'Billy Beer', type: 'dark', location: [{lat: 123,long: 123}], notes: 'fruit, chocolate, walnut', price: 12.99, rating: 4.5},
-    {listName: 'light favourites', name: 'nightowl', id:2, listId:2 , beer: 'Tex Mex', type: 'light', location: [{lat: 123, long: 123}], notes: 'citrus, mint, fruit,citrus, mint, fruit,citrus, mint, fruit,citrus, mint, fruit,citrus, mint, fruit,citrus, mint, fruit',  price: 7.99, rating: 3.5},
-    {listName: 'porter favourites', name: 'bushwicks', id:3, listId:4 , beer: 'mmmm mm plus', type: 'porter', location: [{lat: 123, long: 123}], notes: 'oat, chocolate, walnut', price: 10.99, rating: 4.3},
-    {listName: 'IPA favourites', name: 'moss hallows', id:4, listId:5 , beer: 'Capn ale', type: 'IPA', location: [{lat: 123, long: 123}], notes: 'fruit, chocolate, walnut', price: 12.99, rating: 3.2},
-    {listName: 'amber favourites', name: 'bushwicks', id:5, listId:3 , beer: 'mmmm mm', type: 'amber', location: [{lat: 123, long: 123}], notes: 'oat, chocolate, walnut', price: 8.99, rating: 4.1},
-    {listName: 'light favourites', name: 'benchmark', id:6, listId:2 , beer: 'Long Bow', type: 'light', location: [{lat: 123, long: 123}], notes: 'fruit, chocolate, walnut', price: 4.99, rating: 2.5}
-  ];
+  myList: ListItem[] = [];
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
   modelData: any;
   listItems: ListItem[] = [];
+  filteredListItems: ListItem[] = [];
+  subscribe!: Subscription;
 
-  constructor(private _modalController: ModalController, private _navCtrl: NavController, private _route: ActivatedRoute) { }
+  constructor(private _modalController: ModalController, private _navCtrl: NavController, private _route: ActivatedRoute, private _listsService: ListsService) { }
 
   ngOnInit() {
-    const id = Number(this._route.snapshot.paramMap.get('id'));
-    this.getListItems(id);
+    this.getAllLists();
   }
 
   getBeerType(type: string) {
@@ -56,11 +52,11 @@ export class ListDetailsComponent implements OnInit {
     const modal = await this._modalController.create({
       component: ModalComponent,
       componentProps: {
-        modelName: data.name,
-        modelBeer: data.beer,
+        modelName: data.establishment,
+        modelBeer: data.beerName,
         modelType: data.type,
         modelNotes: data.notes,
-        modelLocation: data.location,
+        // modelLocation: data.location,
         modelPrice: data.price,
         modelRating: data.rating
       },
@@ -78,15 +74,26 @@ export class ListDetailsComponent implements OnInit {
     this._navCtrl.back();
   }
 
-  getListItems(id: number) {
-    this.myList.forEach(item => {
+  getAllLists(): void {
+    const id = Number(this._route.snapshot.paramMap.get('id'));
+    this.subscribe = this._listsService.getAllLists().subscribe(
+      items => {
+        this.listItems = items;
+        this.getListItems(id, this.listItems);
+      }
+    );
+  }
+
+  getListItems(id: number, listItem: ListItem[]) {
+    listItem.forEach(item => {
       if(item.listId === id){
-        this.listItems.push(item);
+        this.filteredListItems.push(item);
       }
     });
   }
 
   deleteList(id: number): void {
-    console.log('list removed');
+    //call to list service
+    console.log('list removed', id);
   }
 }

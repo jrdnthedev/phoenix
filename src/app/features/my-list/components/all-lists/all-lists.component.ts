@@ -1,5 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UserList } from '../../interfaces/user-lists/user-lists';
+import { UserListsService } from '../services/user-lists/user-lists.service';
 
 @Component({
   selector: 'app-all-lists',
@@ -7,16 +11,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-lists.component.scss'],
 })
 export class AllListsComponent implements OnInit {
-  myLists: any = [
-    {name: 'dark favourites', type: 'dark', total: 1, id:1},
-    {name: 'light favourites', type: 'light', total: 2, id:2},
-    {name: 'amber favourites', type: 'amber', total: 1, id:3},
-    {name: 'porter favourites', type: 'porter', total: 1, id:4},
-    {name: 'IPA favourites', type: 'porter', total: 1, id:5},
-  ];
+  myLists: UserList[] = [];
+  subscribe!: Subscription;
 
-  constructor() { }
+  constructor(private _allLists: UserListsService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getMyLists();
+  }
 
+  getMyLists(): void {
+    this.subscribe = this._allLists.getAllLists().subscribe(
+      lists => this.myLists = lists
+    );
+  }
 }
