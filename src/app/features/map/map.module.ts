@@ -5,6 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MapComponent } from './components/map/map.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MapPageRoutingModule } from './map-routing.module';
+import { SheetModalComponent } from './modal/sheet-modal/sheet-modal.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -14,7 +15,8 @@ import { MapPageRoutingModule } from './map-routing.module';
   ],
   declarations: [
     MapPage,
-    MapComponent
+    MapComponent,
+    SheetModalComponent
   ]
 })
 export class MapPageModule {}

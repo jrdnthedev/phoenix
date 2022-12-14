@@ -5,6 +5,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
 import { ListsService } from 'src/app/features/my-list/components/services/lists/lists.service';
 import { Subscription } from 'rxjs';
+import { ModalController } from '@ionic/angular';
+import { SheetModalComponent } from '../../modal/sheet-modal/sheet-modal.component';
 
 @Component({
   selector: 'app-map',
@@ -18,8 +20,9 @@ export class MapComponent implements OnInit {
   markers: GoogleMap;
   listItem: any;
   subscribe!: Subscription;
+  modelData: any;
 
-  constructor(private _listService: ListsService) { }
+  constructor(private _listService: ListsService, private _modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.getList();
@@ -42,7 +45,7 @@ export class MapComponent implements OnInit {
       },
     });
 
-    this.addMarkers();
+    await this.addMarkers();
   }
 
   async addMarkers() {
@@ -51,14 +54,38 @@ export class MapComponent implements OnInit {
       this.listItem.forEach(element => {
         markers.push({
           coordinate: {
-            lat:element.lat,
-            lng:element.lon
+            lat: element.lat,
+            lng: element.lon
           },
           title: element.beerName,
-          snippet:element.establishment
+          snippet: element.address
         });
       });
       await this.newMap.addMarkers(markers);
+
+      this.newMap.setOnMarkerClickListener(async (marker) => {
+        console.log(marker);
+        this.openModal(marker);
+      });
+  }
+
+  async openModal(data: any) {
+    const modal = await this._modalCtrl.create({
+      component: SheetModalComponent,
+      initialBreakpoint: 0.25,
+      breakpoints: [0, 0.25, 0.5, 0.75],
+      componentProps: {
+        // modelName: data.snippet,
+        modelBeer: data.title
+      },
+    });
+    modal.onDidDismiss().then((modelData) => {
+      if (modelData !== null) {
+        this.modelData = modelData.data;
+        console.log('Modal Data : ' + modelData.data);
+      }
+    });
+    return await modal.present();
   }
 
   getList(): void {
