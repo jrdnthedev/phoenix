@@ -17,12 +17,13 @@ export class ModalComponent implements OnInit {
   @Input() modelLocation: any;
   @Input() modelPrice: number;
   @Input() modelRating: number;
+  @Input() modelAddress: string;
 
   constructor(private _modalController: ModalController) { }
 
   ngOnInit() {}
 
-  async closeModel() {
+  async saveModel() {
     const close: string = 'Modal Removed';
     await this._modalController.dismiss(close);
   }

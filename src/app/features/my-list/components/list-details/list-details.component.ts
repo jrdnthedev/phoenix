@@ -56,7 +56,7 @@ export class ListDetailsComponent implements OnInit {
         modelBeer: data.beerName,
         modelType: data.type,
         modelNotes: data.notes,
-        // modelLocation: data.location,
+        modelAddress: data.address,
         modelPrice: data.price,
         modelRating: data.rating
       },
@@ -95,5 +95,8 @@ export class ListDetailsComponent implements OnInit {
   deleteList(id: number): void {
     //call to list service
     console.log('list removed', id);
+  }
+  ionViewWillLeave(): void {
+    this.subscribe.unsubscribe();
   }
 }

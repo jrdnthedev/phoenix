@@ -18,7 +18,7 @@
   
     <ion-item>
       <ion-label position="stacked">Address</ion-label>
-      <ion-input [clearInput]="true" placeholder="Enter location" ></ion-input>
+      <ion-input [clearInput]="true" placeholder="Enter location" [(ngModel)]="modelAddress"></ion-input>
     </ion-item>
   
     <ion-item>
@@ -49,7 +49,7 @@
   </ion-list>
   <ion-row>
     <ion-col text-center>
-      <ion-button (click)="closeModel()">Close</ion-button>
+      <ion-button (click)="saveModel()">Save</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

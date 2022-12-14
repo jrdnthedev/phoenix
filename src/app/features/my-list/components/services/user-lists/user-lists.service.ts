@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { ListItem } from '../../../interfaces/list-items/list-item';
 import { UserList } from '../../../interfaces/user-lists/user-lists';
 
 @Injectable({
@@ -11,7 +10,6 @@ import { UserList } from '../../../interfaces/user-lists/user-lists';
 })
 export class UserListsService {
   private _url = 'https://xz6lp.wiremockapi.cloud/user-lists';
-  private _list = '';
 
   constructor(private _http: HttpClient) { }
 
@@ -20,6 +18,10 @@ export class UserListsService {
       tap(list => console.log('All',JSON.stringify(list))),
       catchError(this.handleError)
     );
+  }
+
+  editList(){
+
   }
 
   private handleError(err: HttpErrorResponse) {
