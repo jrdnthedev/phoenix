@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ListsService } from 'src/app/features/my-list/components/services/lists/lists.service';
 import { Subscription } from 'rxjs';
 import { ModalController } from '@ionic/angular';
-import { SheetModalComponent } from '../../modal/sheet-modal/sheet-modal.component';
+import { SheetModalComponent } from '../modal/sheet-modal/sheet-modal.component';
 
 @Component({
   selector: 'app-map',

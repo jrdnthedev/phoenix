@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiKey:'API_KEY'
+  apiKey:'API_KEY',
+  serverUrl: 'http://localhost:8080'
 };
 
 /*
