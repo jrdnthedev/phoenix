@@ -25,7 +25,7 @@ export class MapComponent implements OnInit {
   constructor(private _listService: ListsService, private _modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.getList();
+    // this.getList();
     this.getMap();
   }
 
@@ -88,9 +88,9 @@ export class MapComponent implements OnInit {
     return await modal.present();
   }
 
-  getList(): void {
-    this.subscribe = this._listService.getAllLists().subscribe(
-      list => this.listItem = list
-    );
-  }
+  // getList(): void {
+  //   this.subscribe = this._listService.getAllLists().subscribe(
+  //     list => this.listItem = list
+  //   );
+  // }
 }

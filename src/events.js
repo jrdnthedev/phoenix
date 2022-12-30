@@ -51,10 +51,54 @@ function createRouter(db) {
     );
   });
 
+  router.get('/list/:id', function (req, res, next) {
+    db.query( 
+      'SELECT * FROM list WHERE list_id=?',
+      [req.params.id],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+
+  router.get('/list_item/:id', function (req, res, next) {
+    db.query( 
+      'SELECT * FROM list_item WHERE list_item_id=?',
+      [req.params.id],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+
   router.put('/user/:id', function (req, res, next) {
     db.query(
       'UPDATE user SET firstName=?, lastName=?, age=?, description=?, hometown=?, country=? WHERE id=?',
       [req.body.firstName, req.body.lastName, req.body.age, req.body.description, req.body.hometown, req.body.country, req.params.id],
+      (error) => {
+        if (error) {
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
+
+  router.put('/list_item/:id', function (req, res, next) {
+    db.query(
+      'UPDATE list_item SET establishment=?, beerName=?, type=?, address=? WHERE id=?',
+      [req.body.establishment, req.body.beerName, req.body.type, req.body.address, req.params.id],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});

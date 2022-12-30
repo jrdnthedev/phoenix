@@ -25,10 +25,10 @@ export class ListDetailsComponent implements OnInit {
   filteredListItems: ListItem[] = [];
   subscribe!: Subscription;
 
-  constructor(private _modalController: ModalController, private _navCtrl: NavController, private _route: ActivatedRoute, private _listsService: ListsService) { }
+  constructor(private _modalController: ModalController, private _navCtrl: NavController, private _route: ActivatedRoute, private listsService: ListsService) { }
 
   ngOnInit() {
-    this.getAllLists();
+    this.getList();
   }
 
   getBeerType(type: string) {
@@ -58,7 +58,8 @@ export class ListDetailsComponent implements OnInit {
         modelNotes: data.notes,
         modelAddress: data.address,
         modelPrice: data.price,
-        modelRating: data.rating
+        modelRating: data.rating,
+        id:data.id
       },
     });
     modal.onDidDismiss().then((modelData) => {
@@ -74,22 +75,13 @@ export class ListDetailsComponent implements OnInit {
     this._navCtrl.back();
   }
 
-  getAllLists(): void {
+  getList(): void {
     const id = Number(this._route.snapshot.paramMap.get('id'));
-    this.subscribe = this._listsService.getAllLists().subscribe(
+    this.subscribe = this.listsService.getListItems(id).subscribe(
       items => {
         this.listItems = items;
-        this.getListItems(id, this.listItems);
       }
     );
-  }
-
-  getListItems(id: number, listItem: ListItem[]) {
-    listItem.forEach(item => {
-      if(item.listId === id){
-        this.filteredListItems.push(item);
-      }
-    });
   }
 
   deleteList(id: number): void {

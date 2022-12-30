@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserList } from '../../interfaces/user-lists/user-lists';
-import { UserListsService } from '../services/user-lists/user-lists.service';
+import { ListsService } from '../services/lists/lists.service';
 
 @Component({
   selector: 'app-all-lists',
@@ -14,15 +14,19 @@ export class AllListsComponent implements OnInit {
   myLists: UserList[] = [];
   subscribe!: Subscription;
 
-  constructor(private _allLists: UserListsService) { }
+  constructor(private listService: ListsService) { }
 
   ngOnInit() {
     this.getMyLists();
   }
 
   getMyLists(): void {
-    this.subscribe = this._allLists.getAllLists().subscribe(
+    this.subscribe = this.listService.getLists(1).subscribe(
       lists => this.myLists = lists
     );
+  }
+
+  ionViewWillLeave(): void {
+    this.subscribe.unsubscribe();
   }
 }

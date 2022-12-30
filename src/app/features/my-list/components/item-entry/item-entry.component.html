@@ -18,11 +18,7 @@
     <ion-label position="stacked">Add To My List</ion-label>
     <ion-select placeholder="Make a Selection" [(ngModel)]="selectedList">
       <ion-select-option value="">No Selection</ion-select-option>
-      <ion-select-option value="Dark Favourites">Dark Favourites</ion-select-option>
-      <ion-select-option value="Porter Favourites">Porter Favourites</ion-select-option>
-      <ion-select-option value="Ale Favourites">Ale Favourites</ion-select-option>
-      <ion-select-option value="Amber Favourites">Amber Favourites</ion-select-option>
-      <ion-select-option value="Light Favourites">light Favourites</ion-select-option>
+      <ion-select-option [value]="item.id" *ngFor="let item of myLists">{{item.listName}}</ion-select-option>
     </ion-select>
   </ion-item>
 
@@ -44,7 +40,7 @@
   <ion-item>
     <ion-label position="stacked">Rating</ion-label>
     <!-- <ion-range></ion-range> -->
-    <ion-input [clearInput]="true" placeholder="Enter a rating between 0 - 5" type="number" [(ngModel)]="rating"></ion-input>
+    <ion-input [clearInput]="true" placeholder="Enter a rating between 0 - 5" type="number" [(ngModel)]="rating" min="0" max="5"></ion-input>
   </ion-item>
 
   <ion-item>

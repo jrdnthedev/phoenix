@@ -16,6 +16,5 @@ export class MapPage implements OnInit {
 
   getUsers(): void {
     this.user = this.userService.getUsers();
-    console.log(this.user);
   }
 }

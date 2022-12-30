@@ -23,11 +23,12 @@
   
     <ion-item>
       <ion-label position="stacked">Select Beer type</ion-label>
-      <ion-select placeholder="Make a Selection">
+      <ion-select placeholder="Make a Selection" [(ngModel)]="modelType">
         <ion-select-option value="">No Selection</ion-select-option>
         <ion-select-option value="Dark">Dark</ion-select-option>
         <ion-select-option value="Porter">Porter</ion-select-option>
         <ion-select-option value="Ale">Ale</ion-select-option>
+        <ion-select-option value="Light">Light</ion-select-option>
       </ion-select>
     </ion-item>
   
@@ -50,6 +51,9 @@
   <ion-row>
     <ion-col text-center>
       <ion-button (click)="saveModel()">Save</ion-button>
+    </ion-col>
+    <ion-col text-center>
+      <ion-button (click)="exit()">Exit</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

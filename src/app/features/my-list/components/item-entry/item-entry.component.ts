@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ListItem } from '../../interfaces/list-items/list-item';
+import { Subscription } from 'rxjs';
+import { ListsService } from '../services/lists/lists.service';
 
 @Component({
   selector: 'app-item-entry',
@@ -17,14 +18,17 @@ export class ItemEntryComponent implements OnInit {
   @Input() rating: number;
   @Input() selectedList: string;
   @Input() selectedBeerType: string;
-  newEntry: any[] = [];
+  myLists: any;
+  subscribe!: Subscription;
+  id: number;
+  constructor(private listService: ListsService) { }
 
-  constructor() { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.getLists();
+  }
 
   save(): void {
-    this.newEntry.push({
+    const newEntry = {
       name: this.name,
       beer: this.beer,
       type: this.selectedBeerType,
@@ -32,8 +36,17 @@ export class ItemEntryComponent implements OnInit {
       location: this.location,
       price: this.price,
       rating: this.rating,
-      list: this.selectedList,
-    });
-    console.log('information save!', this.newEntry);
+      id: this.selectedList
+    };
+    console.log('information save!', newEntry);
+  }
+  getLists(){
+    this.subscribe = this.listService.getLists(1).subscribe(
+      list => this.myLists = list
+    );
+  }
+
+  ionViewWillLeave(): void {
+    this.subscribe.unsubscribe();
   }
 }

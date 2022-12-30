@@ -3,16 +3,16 @@
     <ion-buttons slot="start">
       <ion-back-button default-href="#" (click)="back()"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{filteredListItems[0].listName}}</ion-title>
+    <ion-title></ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="clear" color="danger" (click)="deleteList(filteredListItems[0].listId)">Delete List</ion-button>
+      <ion-button fill="clear" color="danger" (click)="deleteList(listItems[0].listId)">Delete List</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ng-container *ngFor="let item of filteredListItems">
+    <ng-container *ngFor="let item of listItems">
       <ion-card (click)="openModal(item)">
         <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
         <ion-card-header>
