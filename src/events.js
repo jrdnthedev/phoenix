@@ -36,7 +36,8 @@ function createRouter(db) {
   });
 
   router.get('/user/:id', function (req, res, next) {
-    db.query(
+    db.query( 
+      // 'SELECT `user`.*, `list`.*, `list_item`.* FROM `user` LEFT JOIN `list` ON `list`.`list_id` = `user`.`id` LEFT JOIN `list_item` ON `list_item`.`list_item_id` = `list`.`id` WHERE `user`.`id`=?',
       'SELECT * FROM user WHERE id=?',
       [req.params.id],
       (error, results) => {
@@ -52,8 +53,8 @@ function createRouter(db) {
 
   router.put('/user/:id', function (req, res, next) {
     db.query(
-      'UPDATE user SET name=?, description=?, date=? WHERE id=? AND owner=?',
-      [req.body.name, req.body.description, new Date(req.body.date), req.params.id, owner],
+      'UPDATE user SET firstName=?, lastName=?, age=?, description=?, hometown=?, country=? WHERE id=?',
+      [req.body.firstName, req.body.lastName, req.body.age, req.body.description, req.body.hometown, req.body.country, req.params.id],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});

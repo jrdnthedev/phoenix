@@ -16,9 +16,7 @@ export class UserService {
   }
 
   getUser(id: number): Observable<any> {
-    return this.http.get(`${environment.serverUrl}/user/${id}`).pipe(
-      tap(list => console.log('All',JSON.stringify(list)))
-      );
+    return this.http.get(`${environment.serverUrl}/user/${id}`);
   }
 
   createUser(user) {
@@ -33,19 +31,19 @@ export class UserService {
     return this.http.delete(`${environment.serverUrl}/user/${user.id}`);
   }
 
-  private async request(method: string, url: string, data?: any) {
-    // const token = await this.oktaAuth.getAccessToken();
+  // private async request(method: string, url: string, data?: any) {
+  //   // const token = await this.oktaAuth.getAccessToken();
 
-    const result = this.http.request(method, url, {
-      body: data,
-      responseType: 'json',
-      observe: 'body',
-      headers: {
-        // authorization: `Bearer ${token}`
-      }
-    });
-    return new Promise((resolve, reject) => {
-      result.subscribe(resolve, reject);
-    }).then(resolve => resolve);
-  }
+  //   const result = this.http.request(method, url, {
+  //     body: data,
+  //     responseType: 'json',
+  //     observe: 'body',
+  //     headers: {
+  //       // authorization: `Bearer ${token}`
+  //     }
+  //   });
+  //   return new Promise((resolve, reject) => {
+  //     result.subscribe(resolve, reject);
+  //   }).then(resolve => resolve);
+  // }
 }

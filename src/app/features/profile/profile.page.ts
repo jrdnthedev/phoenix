@@ -32,7 +32,21 @@ export class ProfilePage implements OnInit {
         this.hometown = this.user.hometown;
         this.country = this.user.country;
         this.email = this.user.email;
+        console.log(this.user);
       }
     );
+  }
+
+  updateUser(): void {
+    const savedData = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      age: this.age,
+      description: this.description,
+      hometown: this.hometown,
+      country: this.country,
+      id: this.user.id
+    };
+    this.userService.updateUser(savedData).subscribe();
   }
 }
