@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
     this.newMap = await GoogleMap.create({
       id: 'map',
       element: mapRef,
-      apiKey: environment.apiKey,
+      apiKey: 'environment.apiKey',
       config: {
         center: {
           lat: coordinates.coords.latitude,
