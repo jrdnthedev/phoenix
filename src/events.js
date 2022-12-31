@@ -35,6 +35,21 @@ function createRouter(db) {
     );
   });
 
+  router.get('/list_item', function (req, res, next) {
+    db.query(
+      'SELECT * FROM list_item',
+      [owner, 10*(req.params.page || 0)],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+
   router.get('/user/:id', function (req, res, next) {
     db.query( 
       // 'SELECT `user`.*, `list`.*, `list_item`.* FROM `user` LEFT JOIN `list` ON `list`.`list_id` = `user`.`id` LEFT JOIN `list_item` ON `list_item`.`list_item_id` = `list`.`id` WHERE `user`.`id`=?',
@@ -97,8 +112,8 @@ function createRouter(db) {
 
   router.put('/list_item/:id', function (req, res, next) {
     db.query(
-      'UPDATE list_item SET establishment=?, beerName=?, type=?, address=? WHERE id=?',
-      [req.body.establishment, req.body.beerName, req.body.type, req.body.address, req.params.id],
+      'UPDATE list_item SET establishment=?, beerName=?, type=?, rating=?, address=? WHERE id=?',
+      [req.body.establishment, req.body.beerName, req.body.type, req.body.rating,req.body.address, req.params.id],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});

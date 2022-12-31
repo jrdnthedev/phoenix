@@ -21,6 +21,10 @@ export class ListsService {
     return this.http.get(`${environment.serverUrl}/list_item/${id}`);
   }
 
+  getAllListItems(): Observable<any> {
+    return this.http.get(`${environment.serverUrl}/list_item`);
+  }
+
   createList(user) {
     return this.http.post(`${environment.serverUrl}/user`, user);
   }

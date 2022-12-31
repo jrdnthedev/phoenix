@@ -34,6 +34,7 @@ export class ModalComponent implements OnInit {
       establishment: this.modelName,
       beerName: this.modelBeer,
       type: this.modelType,
+      rating: this.modelRating,
       // lat: '',
       // lng: '',
       address: this.modelAddress

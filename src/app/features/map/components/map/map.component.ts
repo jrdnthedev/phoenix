@@ -22,10 +22,10 @@ export class MapComponent implements OnInit {
   subscribe!: Subscription;
   modelData: any;
 
-  constructor(private _listService: ListsService, private _modalCtrl: ModalController) { }
+  constructor(private listService: ListsService, private _modalCtrl: ModalController) { }
 
   ngOnInit() {
-    // this.getList();
+    this.getList();
     this.getMap();
   }
 
@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
     this.newMap = await GoogleMap.create({
       id: 'map',
       element: mapRef,
-      apiKey: 'environment.apiKey',
+      apiKey: environment.apiKey,
       config: {
         center: {
           lat: coordinates.coords.latitude,
@@ -55,7 +55,7 @@ export class MapComponent implements OnInit {
         markers.push({
           coordinate: {
             lat: element.lat,
-            lng: element.lon
+            lng: element.lng
           },
           title: element.beerName,
           snippet: element.address
@@ -88,9 +88,9 @@ export class MapComponent implements OnInit {
     return await modal.present();
   }
 
-  // getList(): void {
-  //   this.subscribe = this._listService.getAllLists().subscribe(
-  //     list => this.listItem = list
-  //   );
-  // }
+  getList(): void {
+    this.subscribe = this.listService.getAllListItems().subscribe(
+      list => this.listItem = list
+    );
+  }
 }
