@@ -1,7 +1,7 @@
 <div formGroupName="listItem">
   <ion-item>
     <ion-label position="stacked">Place Name</ion-label>
-    <ion-input [clearInput]="true" placeholder="Enter establishment name" [(ngModel)]="name"></ion-input>
+    <ion-input [clearInput]="true" placeholder="Enter establishment name" [(ngModel)]="establishment"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -11,14 +11,14 @@
 
   <ion-item>
     <ion-label position="stacked">Address</ion-label>
-    <ion-input [clearInput]="true" placeholder="Enter location" [(ngModel)]="location"></ion-input>
+    <ion-input [clearInput]="true" placeholder="Enter location" [(ngModel)]="address"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Add To My List</ion-label>
     <ion-select placeholder="Make a Selection" [(ngModel)]="selectedList">
       <ion-select-option value="">No Selection</ion-select-option>
-      <ion-select-option [value]="item.id" *ngFor="let item of myLists">{{item.listName}}</ion-select-option>
+      <ion-select-option [value]="item.listName" *ngFor="let item of myLists">{{item.listName}}</ion-select-option>
     </ion-select>
   </ion-item>
 

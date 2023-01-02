@@ -9,17 +9,17 @@ import { ListsService } from '../services/lists/lists.service';
 })
 export class ItemEntryComponent implements OnInit {
   @Input() title: string;
-  @Input() name: string;
+  @Input() establishment: string;
   @Input() beer: string;
   @Input() type: string;
   @Input() notes: string;
-  @Input() location: any;
+  @Input() address: any;
   @Input() price: number;
   @Input() rating: number;
   @Input() selectedList: string;
   @Input() selectedBeerType: string;
   myLists: any;
-  subscribe!: Subscription;
+  subscribe: Subscription [] = [];
   id: number;
   constructor(private listService: ListsService) { }
 
@@ -29,24 +29,30 @@ export class ItemEntryComponent implements OnInit {
 
   save(): void {
     const newEntry = {
-      name: this.name,
-      beer: this.beer,
+      establishment: this.establishment,
+      beerName: this.beer,
       type: this.selectedBeerType,
       notes: this.notes,
-      location: this.location,
+      address: this.address,
       price: this.price,
       rating: this.rating,
-      id: this.selectedList
+      listName: this.selectedList,
+      id:1
     };
     console.log('information save!', newEntry);
+    this.subscribe.push(
+      this.listService.createListItem(newEntry).subscribe()
+    );
   }
   getLists(){
-    this.subscribe = this.listService.getLists(1).subscribe(
+    this.subscribe.push(this.listService.getLists(1).subscribe(
       list => this.myLists = list
-    );
+    ));
   }
 
   ionViewWillLeave(): void {
-    this.subscribe.unsubscribe();
+    this.subscribe.forEach(item => {
+      item.unsubscribe();
+    });
   }
 }

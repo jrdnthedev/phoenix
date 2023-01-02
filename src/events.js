@@ -20,6 +20,21 @@ function createRouter(db) {
     );
   });
 
+  router.post('/list_item', (req, res, next) => {
+    db.query(
+      'INSERT INTO list_item (list_item_id,listName, establishment, beerName, type, address, notes, price, rating) VALUES (?,?,?,?,?,?,?,?,?)',
+      [req.body.id,req.body.listName, req.body.establishment, req.body.beerName, req.body.type, req.body.address, req.body.notes, req.body.price, req.body.rating],
+      (error) => {
+        if (error) {
+          console.error(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
+
   router.get('/user', function (req, res, next) {
     db.query(
       'SELECT * FROM user',

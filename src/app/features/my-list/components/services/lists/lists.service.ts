@@ -29,6 +29,10 @@ export class ListsService {
     return this.http.post(`${environment.serverUrl}/user`, user);
   }
 
+  createListItem(item) {
+    return this.http.post(`${environment.serverUrl}/list_item`, item);
+  }
+
   updateList(item) {
     return this.http.put(`${environment.serverUrl}/list_item/${item.id}`, item);
   }

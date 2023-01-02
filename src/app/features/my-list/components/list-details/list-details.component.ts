@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable max-len */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonModal, ModalController, NavController } from '@ionic/angular';
@@ -13,26 +11,31 @@ import { ListsService } from '../services/lists/lists.service';
   templateUrl: './list-details.component.html',
   styleUrls: ['./list-details.component.scss'],
 })
-
 export class ListDetailsComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   myList: ListItem[] = [];
 
-  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  message =
+    'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
   modelData: any;
   listItems: ListItem[] = [];
   filteredListItems: ListItem[] = [];
   subscribe!: Subscription;
 
-  constructor(private _modalController: ModalController, private _navCtrl: NavController, private _route: ActivatedRoute, private listsService: ListsService) { }
+  constructor(
+    private modalController: ModalController,
+    private navCtrl: NavController,
+    private route: ActivatedRoute,
+    private listsService: ListsService
+  ) {}
 
   ngOnInit() {
     this.getList();
   }
 
   getBeerType(type: string) {
-    switch(type) {
+    switch (type) {
       case 'dark':
         return 'dark';
       case 'light':
@@ -42,14 +45,14 @@ export class ListDetailsComponent implements OnInit {
       case 'amber':
         return 'amber';
       case 'IPA':
-          return 'light';
+        return 'light';
       case 'ale':
-          return 'light';
+        return 'light';
     }
   }
 
   async openModal(data: ListItem) {
-    const modal = await this._modalController.create({
+    const modal = await this.modalController.create({
       component: ModalComponent,
       componentProps: {
         modelName: data.establishment,
@@ -59,7 +62,7 @@ export class ListDetailsComponent implements OnInit {
         modelAddress: data.address,
         modelPrice: data.price,
         modelRating: data.rating,
-        id:data.id
+        id: data.id,
       },
     });
     modal.onDidDismiss().then((modelData) => {
@@ -72,16 +75,14 @@ export class ListDetailsComponent implements OnInit {
   }
 
   back(): void {
-    this._navCtrl.back();
+    this.navCtrl.back();
   }
 
   getList(): void {
-    const id = Number(this._route.snapshot.paramMap.get('id'));
-    this.subscribe = this.listsService.getListItems(id).subscribe(
-      items => {
-        this.listItems = items;
-      }
-    );
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.subscribe = this.listsService.getListItems(id).subscribe((items) => {
+      this.listItems = items;
+    });
   }
 
   deleteList(id: number): void {
