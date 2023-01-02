@@ -49,7 +49,7 @@ export class MapComponent implements OnInit {
         lat: coordinates.coords.latitude,
         lng: coordinates.coords.longitude
       },
-      iconUrl: 'http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png'
+      iconUrl: 'http://maps.google.com/mapfiles/ms/micons/man.png'
     };
     await this.addMarkers();
     await this.newMap.addMarker(myCoords);
