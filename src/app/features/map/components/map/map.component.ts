@@ -44,8 +44,15 @@ export class MapComponent implements OnInit {
         zoom: 15,
       },
     });
-
+    const myCoords = {
+      coordinate: {
+        lat: coordinates.coords.latitude,
+        lng: coordinates.coords.longitude
+      },
+      iconUrl: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    };
     await this.addMarkers();
+    await this.newMap.addMarker(myCoords);
   }
 
   async addMarkers() {
