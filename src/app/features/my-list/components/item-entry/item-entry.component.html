@@ -18,10 +18,10 @@
     <ion-label position="stacked">Add To My List</ion-label>
     <ion-select placeholder="Make a Selection" [(ngModel)]="selectedList">
       <ion-select-option value="">No Selection</ion-select-option>
-      <ion-select-option [value]="item.listName" *ngFor="let item of myLists">{{item.listName}}</ion-select-option>
+      <ion-select-option [value]="{id: item.id, listName: item.listName}" *ngFor="let item of myLists">{{item.listName}}</ion-select-option>
     </ion-select>
   </ion-item>
-
+  
   <ion-item>
     <ion-label position="stacked">Select Beer type</ion-label>
     <ion-select placeholder="Make a Selection" [(ngModel)]="selectedBeerType">

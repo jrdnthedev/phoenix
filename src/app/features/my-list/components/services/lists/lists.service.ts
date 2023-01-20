@@ -41,6 +41,10 @@ export class ListsService {
     return this.http.delete(`${environment.serverUrl}/user/${user.id}`);
   }
 
+  deleteListItem(id: number) {
+    return this.http.delete(`${environment.serverUrl}/list_item/${id}`);
+  }
+
   // private handleError(err: HttpErrorResponse) {
   //   let errorMessage = '';
   //   if(err.error instanceof ErrorEvent) {

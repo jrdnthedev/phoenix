@@ -152,6 +152,20 @@ function createRouter(db) {
       }
     );
   });
+
+  router.delete('/list_item/:id', function (req, res, next) {
+    db.query(
+      'DELETE FROM list_item WHERE id=?',
+      [req.params.id],
+      (error) => {
+        if (error) {
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
   return router;
 }
 

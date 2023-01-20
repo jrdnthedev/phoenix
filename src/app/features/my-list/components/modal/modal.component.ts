@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-/* eslint-disable no-underscore-dangle */
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -23,12 +21,11 @@ export class ModalComponent implements OnInit {
   @Input() id: number;
   subscribe!: Subscription;
 
-  constructor(private _modalController: ModalController, private listService: ListsService) { }
+  constructor(private modalController: ModalController, private listService: ListsService) { }
 
   ngOnInit() {}
 
   async saveModel() {
-    const close: string = 'Modal Removed';
     const item = {
       id: this.id,
       establishment: this.modelName,
@@ -43,8 +40,15 @@ export class ModalComponent implements OnInit {
   }
 
   async exit() {
-    await this._modalController.dismiss(close);
+    await this.modalController.dismiss(close);
   }
+
+  deleteItem(id: number): void {
+    console.log(id, 'deleted');
+    this.listService.deleteListItem(id).subscribe();
+    this.exit();
+  }
+
   ionViewWillLeave(): void {
     this.subscribe.unsubscribe();
   }

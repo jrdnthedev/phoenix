@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ListsService } from '../services/lists/lists.service';
 
@@ -16,12 +17,12 @@ export class ItemEntryComponent implements OnInit {
   @Input() address: any;
   @Input() price: number;
   @Input() rating: number;
-  @Input() selectedList: string;
+  @Input() selectedList: any;
   @Input() selectedBeerType: string;
   myLists: any;
   subscribe: Subscription [] = [];
   id: number;
-  constructor(private listService: ListsService) { }
+  constructor(private listService: ListsService, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.getLists();
@@ -36,13 +37,14 @@ export class ItemEntryComponent implements OnInit {
       address: this.address,
       price: this.price,
       rating: this.rating,
-      listName: this.selectedList,
-      id:1
+      listName: this.selectedList.listName,
+      id: this.selectedList.id
     };
     console.log('information save!', newEntry);
     this.subscribe.push(
       this.listService.createListItem(newEntry).subscribe()
     );
+    this.navCtrl.back();
   }
   getLists(){
     this.subscribe.push(this.listService.getLists(1).subscribe(
